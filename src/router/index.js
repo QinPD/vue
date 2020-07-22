@@ -38,17 +38,14 @@ import nestedRouter from './modules/nested'
  * a base page that does not have permission requirements
  * all roles can be accessed
  */
-export const constantRoutes = [
-  {
+export const constantRoutes = [{
     path: '/redirect',
     component: Layout,
     hidden: true,
-    children: [
-      {
-        path: '/redirect/:path(.*)',
-        component: () => import('@/views/redirect/index')
-      }
-    ]
+    children: [{
+      path: '/redirect/:path(.*)',
+      component: () => import('@/views/redirect/index')
+    }]
   },
   {
     path: '/login',
@@ -74,53 +71,61 @@ export const constantRoutes = [
     path: '/',
     component: Layout,
     redirect: '/dashboard',
-    children: [
-      {
-        path: 'dashboard',
-        component: () => import('@/views/dashboard/index'),
-        name: 'Dashboard',
-        meta: { title: 'Dashboard', icon: 'dashboard', affix: true }
+    children: [{
+      path: 'dashboard',
+      component: () => import('@/views/dashboard/index'),
+      name: 'Dashboard',
+      meta: {
+        title: 'Dashboard',
+        icon: 'dashboard',
+        affix: true
       }
-    ]
+    }]
   },
   {
     path: '/documentation',
     component: Layout,
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views/documentation/index'),
-        name: 'Documentation',
-        meta: { title: 'Documentation', icon: 'documentation', affix: true }
+    children: [{
+      path: 'index',
+      component: () => import('@/views/documentation/index'),
+      name: 'Documentation',
+      meta: {
+        title: 'Documentation',
+        icon: 'documentation',
+        affix: true
       }
-    ]
+    }]
   },
   {
     path: '/guide',
     component: Layout,
     redirect: '/guide/index',
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views/guide/index'),
-        name: 'Guide',
-        meta: { title: 'Guide', icon: 'guide', noCache: true }
+    children: [{
+      path: 'index',
+      component: () => import('@/views/guide/index'),
+      name: 'Guide',
+      meta: {
+        title: 'Guide',
+        icon: 'guide',
+        noCache: true
       }
-    ]
+    }]
   },
   {
     path: '/profile',
     component: Layout,
     redirect: '/profile/index',
     hidden: true,
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views/profile/index'),
-        name: 'Profile',
-        meta: { title: 'Profile', icon: 'user', noCache: true }
+    children: [{
+      path: 'index',
+      component: () => import('@/views/profile/index'),
+      name: 'Profile',
+      meta: {
+        title: 'Profile',
+        icon: 'user',
+        noCache: true
       }
-    ]
+    }]
   }
 ]
 
@@ -128,8 +133,7 @@ export const constantRoutes = [
  * asyncRoutes
  * the routes that need to be dynamically loaded based on user roles
  */
-export const asyncRoutes = [
-  {
+export const asyncRoutes = [{
     path: '/permission',
     component: Layout,
     redirect: '/permission/page',
@@ -140,8 +144,7 @@ export const asyncRoutes = [
       icon: 'lock',
       roles: ['admin', 'editor'] // you can set roles in root nav
     },
-    children: [
-      {
+    children: [{
         path: 'page',
         component: () => import('@/views/permission/page'),
         name: 'PagePermission',
@@ -174,14 +177,16 @@ export const asyncRoutes = [
   {
     path: '/icon',
     component: Layout,
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views/icons/index'),
-        name: 'Icons',
-        meta: { title: 'Icons', icon: 'icon', noCache: true }
+    children: [{
+      path: 'index',
+      component: () => import('@/views/icons/index'),
+      name: 'Icons',
+      meta: {
+        title: 'Icons',
+        icon: 'icon',
+        noCache: true
       }
-    ]
+    }]
   },
 
   /** when your routing map is too long, you can split it into small modules **/
@@ -199,25 +204,34 @@ export const asyncRoutes = [
       title: 'Example',
       icon: 'el-icon-s-help'
     },
-    children: [
-      {
+    children: [{
         path: 'create',
         component: () => import('@/views/example/create'),
         name: 'CreateArticle',
-        meta: { title: 'Create Article', icon: 'edit' }
+        meta: {
+          title: 'Create Article',
+          icon: 'edit'
+        }
       },
       {
         path: 'edit/:id(\\d+)',
         component: () => import('@/views/example/edit'),
         name: 'EditArticle',
-        meta: { title: 'Edit Article', noCache: true, activeMenu: '/example/list' },
+        meta: {
+          title: 'Edit Article',
+          noCache: true,
+          activeMenu: '/example/list'
+        },
         hidden: true
       },
       {
         path: 'list',
         component: () => import('@/views/example/list'),
         name: 'ArticleList',
-        meta: { title: 'Article List', icon: 'list' }
+        meta: {
+          title: 'Article List',
+          icon: 'list'
+        }
       }
     ]
   },
@@ -225,14 +239,15 @@ export const asyncRoutes = [
   {
     path: '/tab',
     component: Layout,
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views/tab/index'),
-        name: 'Tab',
-        meta: { title: 'Tab', icon: 'tab' }
+    children: [{
+      path: 'index',
+      component: () => import('@/views/tab/index'),
+      name: 'Tab',
+      meta: {
+        title: 'Tab',
+        icon: 'tab'
       }
-    ]
+    }]
   },
 
   {
@@ -244,18 +259,23 @@ export const asyncRoutes = [
       title: 'Error Pages',
       icon: '404'
     },
-    children: [
-      {
+    children: [{
         path: '401',
         component: () => import('@/views/error-page/401'),
         name: 'Page401',
-        meta: { title: '401', noCache: true }
+        meta: {
+          title: '401',
+          noCache: true
+        }
       },
       {
         path: '404',
         component: () => import('@/views/error-page/404'),
         name: 'Page404',
-        meta: { title: '404', noCache: true }
+        meta: {
+          title: '404',
+          noCache: true
+        }
       }
     ]
   },
@@ -263,14 +283,15 @@ export const asyncRoutes = [
   {
     path: '/error-log',
     component: Layout,
-    children: [
-      {
-        path: 'log',
-        component: () => import('@/views/error-log/index'),
-        name: 'ErrorLog',
-        meta: { title: 'Error Log', icon: 'bug' }
+    children: [{
+      path: 'log',
+      component: () => import('@/views/error-log/index'),
+      name: 'ErrorLog',
+      meta: {
+        title: 'Error Log',
+        icon: 'bug'
       }
-    ]
+    }]
   },
 
   {
@@ -282,30 +303,37 @@ export const asyncRoutes = [
       title: 'Excel',
       icon: 'excel'
     },
-    children: [
-      {
+    children: [{
         path: 'export-excel',
         component: () => import('@/views/excel/export-excel'),
         name: 'ExportExcel',
-        meta: { title: 'Export Excel' }
+        meta: {
+          title: 'Export Excel'
+        }
       },
       {
         path: 'export-selected-excel',
         component: () => import('@/views/excel/select-excel'),
         name: 'SelectExcel',
-        meta: { title: 'Export Selected' }
+        meta: {
+          title: 'Export Selected'
+        }
       },
       {
         path: 'export-merge-header',
         component: () => import('@/views/excel/merge-header'),
         name: 'MergeHeader',
-        meta: { title: 'Merge Header' }
+        meta: {
+          title: 'Merge Header'
+        }
       },
       {
         path: 'upload-excel',
         component: () => import('@/views/excel/upload-excel'),
         name: 'UploadExcel',
-        meta: { title: 'Upload Excel' }
+        meta: {
+          title: 'Upload Excel'
+        }
       }
     ]
   },
@@ -316,29 +344,33 @@ export const asyncRoutes = [
     redirect: '/zip/download',
     alwaysShow: true,
     name: 'Zip',
-    meta: { title: 'Zip', icon: 'zip' },
-    children: [
-      {
-        path: 'download',
-        component: () => import('@/views/zip/index'),
-        name: 'ExportZip',
-        meta: { title: 'Export Zip' }
+    meta: {
+      title: 'Zip',
+      icon: 'zip'
+    },
+    children: [{
+      path: 'download',
+      component: () => import('@/views/zip/index'),
+      name: 'ExportZip',
+      meta: {
+        title: 'Export Zip'
       }
-    ]
+    }]
   },
 
   {
     path: '/pdf',
     component: Layout,
     redirect: '/pdf/index',
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views/pdf/index'),
-        name: 'PDF',
-        meta: { title: 'PDF', icon: 'pdf' }
+    children: [{
+      path: 'index',
+      component: () => import('@/views/pdf/index'),
+      name: 'PDF',
+      meta: {
+        title: 'PDF',
+        icon: 'pdf'
       }
-    ]
+    }]
   },
   {
     path: '/pdf/download',
@@ -349,47 +381,56 @@ export const asyncRoutes = [
   {
     path: '/theme',
     component: Layout,
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views/theme/index'),
-        name: 'Theme',
-        meta: { title: 'Theme', icon: 'theme' }
+    children: [{
+      path: 'index',
+      component: () => import('@/views/theme/index'),
+      name: 'Theme',
+      meta: {
+        title: 'Theme',
+        icon: 'theme'
       }
-    ]
+    }]
   },
 
   {
     path: '/clipboard',
     component: Layout,
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views/clipboard/index'),
-        name: 'ClipboardDemo',
-        meta: { title: 'Clipboard', icon: 'clipboard' }
+    children: [{
+      path: 'index',
+      component: () => import('@/views/clipboard/index'),
+      name: 'ClipboardDemo',
+      meta: {
+        title: 'Clipboard',
+        icon: 'clipboard'
       }
-    ]
+    }]
   },
 
   {
     path: 'external-link',
     component: Layout,
-    children: [
-      {
-        path: 'https://github.com/PanJiaChen/vue-element-admin',
-        meta: { title: 'External Link', icon: 'link' }
+    children: [{
+      path: 'https://github.com/PanJiaChen/vue-element-admin',
+      meta: {
+        title: 'External Link',
+        icon: 'link'
       }
-    ]
+    }]
   },
 
   // 404 page must be placed at the end !!!
-  { path: '*', redirect: '/404', hidden: true }
+  {
+    path: '*',
+    redirect: '/404',
+    hidden: true
+  }
 ]
 
 const createRouter = () => new Router({
   // mode: 'history', // require service support
-  scrollBehavior: () => ({ y: 0 }),
+  scrollBehavior: () => ({
+    y: 0
+  }),
   routes: constantRoutes
 })
 

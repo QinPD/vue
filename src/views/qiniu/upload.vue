@@ -1,8 +1,15 @@
 <template>
-  <el-upload :data="dataObj" :multiple="true" :before-upload="beforeUpload" action="https://upload.qbox.me" drag>
+  <el-upload
+    :data="dataObj"
+    :multiple="true"
+    :before-upload="beforeUpload"
+    action="https://upload.qbox.me"
+    drag
+  >
     <i class="el-icon-upload" />
     <div class="el-upload__text">
-      将文件拖到此处，或<em>点击上传</em>
+      将文件拖到此处，或
+      <em>点击上传</em>
     </div>
   </el-upload>
 </template>
