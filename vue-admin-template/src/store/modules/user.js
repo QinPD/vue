@@ -1,6 +1,18 @@
-import { login, logout, getInfo } from '@/api/user'
-import { getToken, setToken, removeToken } from '@/utils/auth'
-import { resetRouter } from '@/router'
+import {
+  login,
+  logout,
+  getInfo
+} from '@/api/user'
+import {
+  getToken,
+  setToken,
+  removeToken
+} from '@/utils/auth'
+import {
+  resetRouter,
+  asyncRoutes
+} from '@/router'
+import Layout from '@/layout'
 
 const getDefaultState = () => {
   return {
@@ -33,11 +45,21 @@ const mutations = {
 
 const actions = {
   // user login
-  login({ commit }, userInfo) {
-    const { username, password } = userInfo
+  login({
+    commit
+  }, userInfo) {
+    const {
+      username,
+      password
+    } = userInfo
     return new Promise((resolve, reject) => {
-      login({ username: username.trim(), password: password }).then(response => {
-        const { data } = response
+      login({
+        username: username.trim(),
+        password: password
+      }).then(response => {
+        const {
+          data
+        } = response
         commit('SET_TOKEN', data.token)
         setToken(data.token)
         resolve()
@@ -48,16 +70,25 @@ const actions = {
   },
 
   // get user info
-  getInfo({ commit, state }) {
+  getInfo({
+    commit,
+    state
+  }) {
     return new Promise((resolve, reject) => {
       getInfo(state.token).then(response => {
-        const { data } = response
+        const {
+          data
+        } = response
 
         if (!data) {
           reject('Verification failed, please Login again.')
         }
 
-        const { roles, name, avatar } = data
+        const {
+          roles,
+          name,
+          avatar
+        } = data
 
         // roles must be a non-empty array
         if (!roles || roles.length <= 0) {
@@ -68,14 +99,31 @@ const actions = {
         commit('SET_NAME', name)
         commit('SET_AVATAR', avatar)
         resolve(data)
+        var qin = {
+          path: '/test',
+          component: Layout,
+          redirect: '/test',
+          children: [{
+            path: 'test',
+            name: 'Test',
+            component: () => import('@/views/test'),
+            meta: {
+              title: 'test',
+              icon: 'link'
+            }
+          }]
+        }
+        asyncRoutes.push(qin)
       }).catch(error => {
         reject(error)
       })
     })
   },
-
   // user logout
-  logout({ commit, state }) {
+  logout({
+    commit,
+    state
+  }) {
     return new Promise((resolve, reject) => {
       logout(state.token).then(() => {
         removeToken() // must remove  token  first
@@ -89,7 +137,9 @@ const actions = {
   },
 
   // remove token
-  resetToken({ commit }) {
+  resetToken({
+    commit
+  }) {
     return new Promise(resolve => {
       removeToken() // must remove  token  first
       commit('RESET_STATE')
@@ -104,4 +154,3 @@ export default {
   mutations,
   actions
 }
-
